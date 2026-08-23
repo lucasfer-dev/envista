@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Envista: educação, projetos, equipes e investimento em um só ecossistema.">
+  <title>Envista — ideias que seguem em frente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="authPage" class="auth-page">
+    <section class="auth-story">
+      <header class="public-header">
+        <a href="#" class="logo logo-light" aria-label="Envista início">
+          <span class="logo-symbol" aria-hidden="true"><i></i></span>
+          <strong>envista</strong>
+        </a>
+        <span class="beta-pill">BETA</span>
+      </header>
+
+      <div class="story-content">
+        <span class="story-kicker"><i></i> O futuro começa com uma ideia</span>
+        <h1>Ideias incríveis<br>merecem um <em>próximo passo.</em></h1>
+        <p>Aprenda, forme equipes, desenvolva projetos e conecte-se com quem pode ajudar sua ideia a ganhar o mundo.</p>
+        <div class="story-proof">
+          <div class="avatar-stack" aria-hidden="true"><span>MA</span><span>JS</span><span>AC</span><span>+</span></div>
+          <div><strong>Uma comunidade que constrói</strong><small>Estudantes, mentores e investidores</small></div>
+        </div>
+      </div>
+
+      <blockquote>
+        <span>“</span>
+        <p>Muitos projetos bons paravam após a apresentação final. O Envista nasce para criar o próximo passo.</p>
+        <footer><b>Fundadores do Envista</b><small>Da robótica para um ecossistema de inovação</small></footer>
+      </blockquote>
+      <div class="story-orb orb-one"></div><div class="story-orb orb-two"></div>
+    </section>
+
+    <main class="auth-form-side">
+      <div class="mobile-logo"><span class="logo-symbol"><i></i></span><strong>envista</strong></div>
+      <div class="auth-card">
+        <div class="auth-heading">
+          <span class="eyebrow">BEM-VINDO AO ENVISTA</span>
+          <h2 id="authTitle">Entre na sua conta</h2>
+          <p id="authSubtitle">Continue construindo ideias que transformam.</p>
+        </div>
+
+        <div class="account-type" role="group" aria-label="Tipo de conta">
+          <button class="type-button active" data-role="participant"><span class="type-icon">♟</span><span><b>Participante</b><small>Aluno, mentor ou educador</small></span><i>✓</i></button>
+          <button class="type-button" data-role="investor"><span class="type-icon">↗</span><span><b>Investidor</b><small>Descubra projetos</small></span><i>✓</i></button>
+        </div>
+
+        <form id="loginForm">
+          <label>E-mail <input id="email" type="email" value="marcos@envista.com" placeholder="voce@email.com" required></label>
+          <label>Senha <span class="password-wrap"><input id="password" type="password" value="envista123" placeholder="Sua senha" minlength="6" required><button id="togglePassword" type="button" aria-label="Mostrar senha">◉</button></span></label>
+          <div class="form-options"><label class="check"><input type="checkbox" checked><span></span> Lembrar de mim</label><button type="button" class="text-button">Esqueci minha senha</button></div>
+          <button class="submit-button" type="submit">Entrar na plataforma <span>→</span></button>
+        </form>
+        <div class="divider"><span>ou continue com</span></div>
+        <button class="google-button" id="googleLogin"><b>G</b> Google</button>
+        <p class="signup-prompt">Ainda não faz parte? <button id="openRegister" class="text-button">Crie sua conta gratuitamente</button></p>
+        <p class="legal">Ao continuar, você concorda com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>.</p>
+      </div>
+    </main>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-top">
+        <a href="#" class="logo" data-page="home"><span class="logo-symbol"><i></i></span><strong>envista</strong></a>
+        <button id="closeMenu" class="close-menu" aria-label="Fechar menu">×</button>
+      </div>
+      <nav id="nav" aria-label="Navegação principal"></nav>
+      <div class="sidebar-bottom">
+        <button class="nav-link" data-page="settings"><span>⚙</span>Configurações</button>
+        <div class="user-mini"><div class="user-avatar">MS</div><div><b id="miniName">Marcos Silva</b><small id="miniRole">Participante</small></div><button id="logout" title="Sair">↪</button></div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-header">
+        <button id="openMenu" class="menu-button" aria-label="Abrir menu">☰</button>
+        <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Buscar projetos, equipes e pessoas..."></label>
+        <div class="header-actions"><button class="notification-button" title="Notificações">♢<i></i></button><button id="quickAction" class="primary-button">＋ Novo projeto</button></div>
+      </header>
+      <div id="pageContent" class="page-content" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <dialog id="mainDialog">
+    <form method="dialog" id="dialogForm">
+      <div class="dialog-heading"><div><span class="eyebrow">ENVISTA</span><h2 id="dialogTitle">Criar projeto</h2></div><button class="dialog-close" value="cancel" aria-label="Fechar">×</button></div>
+      <div id="dialogFields"></div>
+      <menu><button value="cancel" class="secondary-button">Cancelar</button><button id="dialogSubmit" value="default" class="primary-button">Salvar</button></menu>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
