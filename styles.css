@@ -78,6 +78,12 @@ button { cursor: pointer; }
 .type-button small { color: var(--muted); font-size: 8px; white-space: nowrap; }
 .type-icon { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; color: var(--teal); background: var(--teal-light); font-size: 16px; }
 #loginForm > label, #dialogFields label, .form-grid label { display: flex; flex-direction: column; gap: 6px; margin: 13px 0; color: #37443e; font-size: 10px; font-weight: 700; }
+.register-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.register-fields > label { display: flex; flex-direction: column; gap: 6px; margin: 0; color: #37443e; font-size: 10px; font-weight: 700; }
+.register-fields small { color: var(--muted); font-size: 8px; font-weight: 400; }
+.handle-input { position: relative; display: flex; align-items: center; }
+.handle-input > span { position: absolute; left: 13px; z-index: 1; color: var(--teal-dark); font-weight: 800; }
+.handle-input input { padding-left: 28px; }
 input, textarea, select { width: 100%; border: 1px solid #dce5e1; border-radius: 8px; outline: none; background: #fbfcfc; color: var(--ink); padding: 12px 13px; }
 input:focus, textarea:focus, select:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(10,155,131,.08); }
 .password-wrap { position: relative; }
@@ -421,6 +427,7 @@ dialog menu { margin: 20px 0 0; padding: 16px 0 0; display: flex; justify-conten
 
 @media (max-width: 520px) {
   .account-type { grid-template-columns: 1fr; }
+  .register-fields { grid-template-columns: 1fr; }
   .page-heading { align-items: flex-start; gap: 14px; }
   .page-heading h1 { font-size: 23px; }
   .page-heading > .primary-button { padding: 0 10px; white-space: nowrap; }

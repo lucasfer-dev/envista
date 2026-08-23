@@ -54,6 +54,10 @@
         </div>
 
         <form id="loginForm">
+          <div id="registerFields" class="register-fields" hidden>
+            <label>Nome completo <input id="registerName" type="text" placeholder="Como devemos chamar você?" autocomplete="name"></label>
+            <label>Identificador <span class="handle-input"><span>@</span><input id="registerHandle" type="text" placeholder="seuidentificador" pattern="[a-zA-Z0-9._-]{3,24}" autocomplete="username"></span><small>Será seu endereço único dentro do Envista.</small></label>
+          </div>
           <label>E-mail <input id="email" type="email" value="marcos@envista.com" placeholder="voce@email.com" required></label>
           <label>Senha <span class="password-wrap"><input id="password" type="password" value="envista123" placeholder="Sua senha" minlength="6" required><button id="togglePassword" type="button" aria-label="Mostrar senha">◉</button></span></label>
           <div class="form-options"><label class="check"><input type="checkbox" checked><span></span> Lembrar de mim</label><button type="button" class="text-button">Esqueci minha senha</button></div>
@@ -61,7 +65,7 @@
         </form>
         <div class="divider"><span>ou continue com</span></div>
         <button class="google-button" id="googleLogin"><b>G</b> Google</button>
-        <p class="signup-prompt">Ainda não faz parte? <button id="openRegister" class="text-button">Crie sua conta gratuitamente</button></p>
+        <p class="signup-prompt"><span id="authPrompt">Ainda não faz parte?</span> <button id="openRegister" type="button" class="text-button">Crie sua conta gratuitamente</button></p>
         <p class="legal">Ao continuar, você concorda com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>.</p>
       </div>
     </main>

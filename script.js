@@ -25,6 +25,7 @@ const investorNav = [
 
 const $ = (selector) => document.querySelector(selector);
 const formatMoney = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+let authMode = 'login';
 
 function showToast(message) {
   const toast = $('#toast');
@@ -46,21 +47,45 @@ $('#togglePassword').addEventListener('click', () => {
   field.type = field.type === 'password' ? 'text' : 'password';
 });
 $('#loginForm').addEventListener('submit', event => { event.preventDefault(); enterApp(); });
-$('#googleLogin').addEventListener('click', enterApp);
+$('#googleLogin').addEventListener('click', () => {
+  if (authMode === 'register') {
+    state.user = { name: 'Novo participante', handle: '@participante' };
+  }
+  enterApp();
+});
 $('#openRegister').addEventListener('click', () => {
-  $('#authTitle').textContent = 'Crie sua conta';
-  $('#authSubtitle').textContent = 'Seu próximo projeto começa por aqui.';
-  $('.submit-button').innerHTML = 'Criar conta gratuita <span>→</span>';
-  $('#email').value = '';
-  $('#password').value = '';
-  $('#email').focus();
+  authMode = authMode === 'login' ? 'register' : 'login';
+  const registering = authMode === 'register';
+  $('#authTitle').textContent = registering ? 'Crie sua conta' : 'Entre na sua conta';
+  $('#authSubtitle').textContent = registering ? 'Seu próximo projeto começa por aqui.' : 'Continue construindo ideias que transformam.';
+  $('.submit-button').innerHTML = registering ? 'Criar conta gratuita <span>→</span>' : 'Entrar na plataforma <span>→</span>';
+  $('#registerFields').hidden = !registering;
+  $('#registerName').required = registering;
+  $('#registerHandle').required = registering;
+  $('#authPrompt').textContent = registering ? 'Já possui uma conta?' : 'Ainda não faz parte?';
+  $('#openRegister').textContent = registering ? 'Voltar para o login' : 'Crie sua conta gratuitamente';
+  if (registering) {
+    $('#email').value = '';
+    $('#password').value = '';
+    $('#registerName').focus();
+  } else {
+    setRole(state.role);
+    $('#password').value = 'envista123';
+    $('#email').focus();
+  }
 });
 
 function enterApp() {
+  if (authMode === 'register' && $('#registerName').value.trim()) {
+    state.user.name = $('#registerName').value.trim();
+    state.user.handle = `@${$('#registerHandle').value.trim().replace(/^@/, '')}`;
+  }
   $('#authPage').classList.add('hidden');
   $('#app').classList.remove('hidden');
   state.page = state.role === 'investor' ? 'investor-home' : 'home';
   $('#miniRole').textContent = state.role === 'investor' ? 'Investidor' : 'Participante';
+  $('#miniName').textContent = state.user.name;
+  $('.user-avatar').textContent = state.user.name.split(/\s+/).map(part => part[0]).slice(0, 2).join('').toUpperCase();
   renderNav();
   renderPage();
 }
@@ -91,7 +116,8 @@ function renderPage() {
 }
 
 function homePage() {
-  return `${pageHeader('DOMINGO, 23 DE AGOSTO', 'Olá, Marcos! <span class="wave">👋</span>', 'Acompanhe suas equipes e continue transformando ideias em projetos.')}
+  const firstName = state.user.name.split(/\s+/)[0];
+  return `${pageHeader('DOMINGO, 23 DE AGOSTO', `Olá, ${firstName}! <span class="wave">👋</span>`, 'Acompanhe suas equipes e continue transformando ideias em projetos.')}
     <section class="stats-grid">${stat('♟','Equipes ativas','3','+1 neste mês','purple')}${stat('▱','Projetos publicados',state.projects.length,'+2 neste mês','blue')}${stat('▤','Aulas concluídas','18','72% da trilha','teal')}${stat('♜','Competições','2','1 inscrição aberta','orange')}</section>
     <div class="content-grid">
       <section class="panel span-two"><div class="panel-heading"><div><h2>Continue aprendendo</h2><p>Sua trilha em andamento</p></div><button data-go="courses" class="link-button">Ver curso →</button></div>
