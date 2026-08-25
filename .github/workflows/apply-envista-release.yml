@@ -1,0 +1,50 @@
+name: Apply Envista Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/apply-envista-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild release
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .envista-release/part* | base64 -d > /tmp/envista-release.zip
+          rm -rf /tmp/envista-release
+          mkdir -p /tmp/envista-release
+          unzip -q /tmp/envista-release.zip -d /tmp/envista-release
+
+          rm -rf app backend components data lib public services types
+          rm -f .env.example .gitignore README.md next-env.d.ts next.config.ts package.json tsconfig.json
+
+          cp -a /tmp/envista-release/envista_mvp2_fixed/. .
+
+          rm -f index.html script.js styles.css .gitkeep
+          rm -rf .envista-upload .envista2 .envista3 .envista-release
+
+      - name: Commit exact Envista release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "release: publish Envista Next.js + Java platform"
+          git push
