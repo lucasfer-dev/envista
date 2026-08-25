@@ -1,19 +1,45 @@
-# Envista — MVP web
+# Envista Platform
 
-Protótipo funcional e responsivo do ecossistema Envista. O MVP inclui dois fluxos de acesso (participante e investidor), equipes com funções diferentes, feed de projetos, cursos modulares, competições, chat, captação e portfólio de investimentos.
+Base do produto Envista com frontend Next.js/React e backend Java/Spring Boot.
 
-Os dados são demonstrativos e ficam apenas em memória durante a sessão. O projeto não possui backend, autenticação real ou persistência em banco de dados nesta etapa.
+## O que mudou nesta versão
+- `Projetos` → `Meus Projetos`; `Equipes` → `Minhas equipes`.
+- exclusão de projeto/equipe para conteúdos próprios;
+- curtidas em projetos e `Seguir` no lugar de `Acompanhar`;
+- não permite salvar/seguir o próprio projeto na tela de detalhe;
+- status Participante/Investidor visível no perfil e navegação;
+- Configurações;
+- onboarding participante com cidade/estado obrigatórios;
+- onboarding investidor com tipo de organização e cargo opcional;
+- área de investidor com Explorar, Projetos, Equipes e Competições;
+- nova área Social com posts por indivíduo ou equipe e seguir pessoas;
+- acesso e painel administrativo para aulas, métricas e moderação;
+- atalho `Ctrl K` removido (busca continua acessível pelo botão);
+- backend Java 21 + Spring Boot criado em `/backend`;
+- migrations iniciais PostgreSQL/Flyway e estrutura pronta para Supabase Auth/Postgres/Storage.
 
-## Executar localmente
-
+## Frontend
 ```bash
-python3 -m http.server 4173
+npm install
+npm run dev
 ```
 
-Abra `http://localhost:4173` no navegador.
+## Backend Java
+```bash
+cd backend
+mvn spring-boot:run
+```
 
-## Fluxos disponíveis
+## Supabase
+A próxima etapa é preencher as credenciais reais e aplicar as migrations ao projeto Supabase. O frontend nunca deve receber `SUPABASE_SERVICE_ROLE_KEY`.
 
-- Entre como **Participante** para acessar projetos, equipes, cursos, competições, mensagens e oportunidades.
-- Entre como **Investidor** para descobrir projetos em captação, acompanhar um portfólio e conversar com equipes.
-- Use qualquer e-mail válido e uma senha de pelo menos seis caracteres. As credenciais preenchidas são apenas demonstrativas.
+Consulte `.env.example` e `backend/README.md`.
+
+## Build
+
+```bash
+npm install
+npm run build
+```
+
+O frontend usa TypeScript em modo `strict`. O tipo das threads de mensagens foi explicitado para evitar `implicit any` durante o build de produção.
