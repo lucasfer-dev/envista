@@ -11,7 +11,15 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="authPage" class="auth-page">
+  <div id="landingPage" class="landing-page">
+    <header class="landing-nav"><a class="logo logo-light" href="#"><span class="logo-symbol"><i></i></span><strong>envista</strong></a><nav><button data-public="about">Sobre</button><button data-public="schools">Para escolas</button><button class="landing-login">Entrar</button></nav></header>
+    <main class="landing-hero"><span class="story-kicker"><i></i> ECOSSISTEMA DE INOVAÇÃO</span><h1>Ideias não deveriam terminar<br><em>depois da competição.</em></h1><p>O Envista conecta aprendizado, equipes, projetos, competições e oportunidades em um único ecossistema.</p><div><button class="primary-button landing-login">Começar agora</button><button class="landing-outline" data-public="about">Conhecer o Envista</button></div></main>
+    <section class="landing-steps"><article><b>01</b><h2>Aprenda</h2><p>Método para transformar problemas reais em projetos.</p></article><article><b>02</b><h2>Construa</h2><p>Encontre pessoas e organize equipes multidisciplinares.</p></article><article><b>03</b><h2>Mostre</h2><p>Publique seu processo e construa um portfólio vivo.</p></article><article><b>04</b><h2>Evolua</h2><p>Participe de competições e encontre oportunidades.</p></article></section>
+  </div>
+
+  <div id="publicPage" class="public-page hidden"></div>
+
+  <div id="authPage" class="auth-page hidden">
     <section class="auth-story">
       <header class="public-header">
         <a href="#" class="logo logo-light" aria-label="Envista início">
@@ -65,6 +73,7 @@
         </form>
         <div class="divider"><span>ou continue com</span></div>
         <button class="google-button" id="googleLogin"><b>G</b> Google</button>
+        <div class="demo-access"><span>ENTRAR COMO DEMONSTRAÇÃO</span><div><button type="button" data-demo="participant">Demo Participante</button><button type="button" data-demo="investor">Demo Investidor</button></div></div>
         <p class="signup-prompt"><span id="authPrompt">Ainda não faz parte?</span> <button id="openRegister" type="button" class="text-button">Crie sua conta gratuitamente</button></p>
         <p class="legal">Ao continuar, você concorda com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>.</p>
       </div>
@@ -88,10 +97,11 @@
       <header class="app-header">
         <button id="openMenu" class="menu-button" aria-label="Abrir menu">☰</button>
         <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Buscar projetos, equipes e pessoas..."></label>
-        <div class="header-actions"><button class="notification-button" title="Notificações">♢<i></i></button><button id="quickAction" class="primary-button">＋ Novo projeto</button></div>
+        <div class="header-actions"><button class="notification-button" title="Notificações" aria-label="Abrir notificações">♢<i></i></button><button id="quickAction" class="primary-button">＋ Novo projeto</button></div>
       </header>
       <div id="pageContent" class="page-content" aria-live="polite"></div>
     </main>
+    <nav id="mobileNav" class="mobile-nav" aria-label="Navegação móvel"></nav>
   </div>
 
   <dialog id="mainDialog">
@@ -101,7 +111,10 @@
       <menu><button value="cancel" class="secondary-button">Cancelar</button><button id="dialogSubmit" value="default" class="primary-button">Salvar</button></menu>
     </form>
   </dialog>
+  <dialog id="overlayDialog" class="overlay-dialog"><div id="overlayContent"></div></dialog>
   <div id="toast" class="toast" role="status"></div>
+  <script src="data.js"></script>
+  <script src="services.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
